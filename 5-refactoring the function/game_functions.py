@@ -1,6 +1,21 @@
 import pygame
 import sys
 
+def check_keydown_events(event,ship):
+    """按键按下"""
+    if event.key == pygame.K_RIGHT:  # down right
+        ship.moving_right = True
+    elif event.key == pygame.K_LEFT:  # down left
+        ship.moving_left = True
+
+def check_keyup_events(event,ship):
+    """按键松开"""
+    if event.key == pygame.K_RIGHT:  # up right
+        ship.moving_right = False
+    elif event.key == pygame.K_LEFT:  # up left
+        ship.moving_left = False
+
+
 def check_events(ship):
     """monitor keyboard and mouse events"""
     for event in pygame.event.get():
@@ -8,16 +23,11 @@ def check_events(ship):
             sys.exit()
         # keydown
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RIGHT: # down right
-                ship.moving_right = True
-            elif event.key == pygame.K_LEFT: # down left
-                ship.moving_left = True
+            check_keydown_events(event,ship)
         # keyup
         elif event.type == pygame.KEYUP:
-            if event.key == pygame.K_RIGHT: #up right
-                ship.moving_right = False
-            elif event.key == pygame.K_LEFT: #up left
-                ship.moving_left = False
+            check_keyup_events(event,ship)
+
 
 def update_screen(ai_settings,screen,ship):
     # redraw the screen
