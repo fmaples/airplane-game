@@ -16,15 +16,18 @@ def run_game():
     ship = Ship(ai_settings,screen)
     # Make a bullet group
     bullets = Group()
-
+    # Make a count
+    frame_count = 0
 
     # star a loop for game
     while True:
+        frame_count += 1
         gf.check_events(ai_settings,screen,ship,bullets)
         ship.update()
+        gf.fire_bullet(ai_settings,screen,ship,bullets,frame_count)
         bullets.update()
         gf.update_screen(ai_settings,screen,ship,bullets)
-        gf.update_bullet(bullets)
+        gf.update_bullet(ai_settings,bullets)
 
 
 run_game()
